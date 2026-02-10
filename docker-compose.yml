@@ -1,0 +1,138 @@
+version: '3.8'
+
+services:
+  shard1_users:
+    image: postgres:15
+    container_name: shard1_users
+    environment:
+      POSTGRES_DB: users_shard1
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - shard1_users_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+  shard2_users:
+    image: postgres:15
+    container_name: shard2_users
+    environment:
+      POSTGRES_DB: users_shard2
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - shard2_users_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+  shard_books:
+    image: postgres:15
+    container_name: shard_books
+    environment:
+      POSTGRES_DB: books_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5434:5432"
+    volumes:
+      - shard_books_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+  shard_stores:
+    image: postgres:15
+    container_name: shard_stores
+    environment:
+      POSTGRES_DB: stores_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5435:5432"
+    volumes:
+      - shard_stores_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+networks:
+  shard-network:
+    driver: bridge
+
+volumes:
+  shard1_users_data:
+  shard2_users_data:
+  shard_books_data:
+  shard_stores_data:
+MBP-Larisa:dz larisaso$ 
+MBP-Larisa:dz larisaso$ cat docker-compose.yml
+version: '3.8'
+
+services:
+  shard1_users:
+    image: postgres:15
+    container_name: shard1_users
+    environment:
+      POSTGRES_DB: users_shard1
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - shard1_users_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+  shard2_users:
+    image: postgres:15
+    container_name: shard2_users
+    environment:
+      POSTGRES_DB: users_shard2
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - shard2_users_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+  shard_books:
+    image: postgres:15
+    container_name: shard_books
+    environment:
+      POSTGRES_DB: books_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5434:5432"
+    volumes:
+      - shard_books_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+  shard_stores:
+    image: postgres:15
+    container_name: shard_stores
+    environment:
+      POSTGRES_DB: stores_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5435:5432"
+    volumes:
+      - shard_stores_data:/var/lib/postgresql/data
+    networks:
+      - shard-network
+
+networks:
+  shard-network:
+    driver: bridge
+
+volumes:
+  shard1_users_data:
+  shard2_users_data:
+  shard_books_data:
+  shard_stores_data:
